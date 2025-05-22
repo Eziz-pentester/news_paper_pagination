@@ -1,0 +1,16 @@
+{% extends 'news/default.html' %}
+{% load custom_filters %}
+{% load tz %}
+
+{% block title %}{{ post.title|censor }}{% endblock %}
+
+{% block content %}
+    <h2>{{ post.title|censor }}</h2>
+    <p><em>Дата публикации: {{ post.created_at|date:"d.m.Y" }}</em></p>
+    <div>
+        {{ post.content|censor }}
+    </div>
+    <br>
+    <a href="{% url 'news_list' %}">← Вернуться к списку новостей</a>
+{% endblock %}
+<

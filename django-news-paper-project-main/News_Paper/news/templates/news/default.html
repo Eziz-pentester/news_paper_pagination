@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Новости{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <h1><a href="{% url 'news_list' %}">News Paper</a></h1>
+        <hr>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <hr>
+        <p>© {{ now|date:"Y" }} News Paper</p>
+    </footer>
+</body>
+</html>

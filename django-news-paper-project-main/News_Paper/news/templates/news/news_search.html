@@ -1,0 +1,38 @@
+{% extends 'news/default.html' %}
+{% load custom_filters %}
+{% load tz %}
+
+{% block title %}Поиск новостей{% endblock %}
+
+{% block content %}
+<h2>Поиск новостей</h2>
+
+<form method="get">
+    <label>Название:</label>
+    <input type="text" name="title" value="{{ request.GET.title }}">
+
+    <label>Автор:</label>
+    <input type="text" name="author" value="{{ request.GET.author }}">
+
+    <label>После даты:</label>
+    <input type="date" name="date_after" value="{{ request.GET.date_after }}">
+
+    <button type="submit">Искать</button>
+</form>
+
+<hr>
+
+<ul>
+    {% for post in news %}
+        <li>
+            <a href="{% url 'news_detail' post.id %}">
+                <strong>{{ post.title|censor }}</strong>
+            </a><br>
+            <em>{{ post.created_at|date:"d.m.Y H:i" }}</em><br>
+            {{ post.content|truncatechars:20|censor }}
+        </li>
+    {% empty %}
+        <li>Ничего не найдено.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
